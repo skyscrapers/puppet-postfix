@@ -39,7 +39,7 @@ mydestination = <%= @realfqdn %>, localhost.localdomain, localhost
 relayhost = <%= relayhost %>
 <% end -%>
 <% end -%>
-mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128<% if @extranetwork -%><% @extranetwork.each do |network| -%> <%= network %><% end -%><% end -%>
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all

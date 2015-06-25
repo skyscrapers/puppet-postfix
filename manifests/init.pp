@@ -42,6 +42,7 @@
 class postfix(
   $root_email                   = $postfix::params::root_email,
   $relayhosts                   = undef,
+  $extranetwork                 = undef,
   $myorigin                     = $postfix::params::myorigin
 ) inherits postfix::params {
 
