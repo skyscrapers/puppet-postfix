@@ -1,5 +1,5 @@
 Facter.add('realfqdn') do
   setcode do
-    Facter::Core::Execution.exec('/bin/hostname -f')
+    Facter::Util::Resolution.exec('/bin/hostname -f')
   end
 end
