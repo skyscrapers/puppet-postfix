@@ -24,4 +24,6 @@ class postfix::params {
   $root_email = 'localhost'
 
   $myorigin = $::realfqdn
+
+  $enabled = true
 }

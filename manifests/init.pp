@@ -43,7 +43,8 @@ class postfix(
   $root_email                   = $postfix::params::root_email,
   $relayhosts                   = undef,
   $extranetwork                 = undef,
-  $myorigin                     = $postfix::params::myorigin
+  $myorigin                     = $postfix::params::myorigin,
+  $enabled                      = $postfix::params::enabled
 ) inherits postfix::params {
 
   contain postfix::install

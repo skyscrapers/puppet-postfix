@@ -24,12 +24,18 @@
 class postfix::service {
 
   service { 'postfix':
-    ensure => running,
-    enable => true;
+    ensure => $postfix::enabled ? {
+      true => running,
+      false => stopped
+    },
+    enable => $postfix::enabled;
   }
 
-  exec { 'postalias':
-    command     => '/usr/sbin/postalias /etc/aliases',
-    refreshonly => true;
+  if $postfix::enabled {
+    exec { 'postalias':
+      command     => '/usr/sbin/postalias /etc/aliases',
+      refreshonly => true;
+    }
   }
+
 }

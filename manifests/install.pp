@@ -24,11 +24,17 @@ class postfix::install {
 
   package {
     $packagelist:
-      ensure => installed;
+      ensure => $postfix::enabled ? {
+        true => installed,
+        false => absent
+      }
   }
 
   package {
     'mailutils':
-      ensure => latest;
+      ensure => $postfix::enabled ? {
+        true => latest,
+        false => absent
+      }
   }
 }

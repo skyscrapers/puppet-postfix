@@ -20,9 +20,14 @@
 # This class is called from postfix
 #
 class postfix::config {
+  $ensure = $postfix::enabled ? {
+    true => file,
+    false => absent
+  }
+
   file {
     '/etc/postfix/main.cf':
-      ensure  => file,
+      ensure  => $ensure,
       content => template('postfix/etc/postfix/main.cf.erb'),
       mode    => '0644',
       owner   => root,
@@ -30,11 +35,14 @@ class postfix::config {
       notify  => Service['postfix'];
 
     '/etc/aliases':
-      ensure  => file,
+      ensure  => $ensure,
       content => template('postfix/etc/aliases.erb'),
       mode    => '0644',
       owner   => root,
       group   => root,
-      notify  => Exec['postalias'];
+      notify  => $postfix::enabled ? {
+        true => Exec['postalias'],
+        false => []
+      };
   }
 }
