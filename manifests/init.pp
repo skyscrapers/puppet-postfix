@@ -52,4 +52,8 @@ class postfix(
   contain postfix::service
 
   Class['postfix::install'] -> Class['postfix::config'] ~> Class['postfix::service']
+
+  if !$enabled {
+    contain postfix::disabled
+  }
 }
