@@ -19,7 +19,7 @@
 #
 # This class is called from postfix
 #
-class postfix::config {
+class postfix::config inherits ::postfix {
   $ensure = $postfix::enabled ? {
     true => file,
     false => absent

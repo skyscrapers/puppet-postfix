@@ -21,7 +21,7 @@
 # This class is meant to be called from postfix
 # It ensure the service is running
 #
-class postfix::service {
+class postfix::service inherits ::postfix {
 
   service { 'postfix':
     ensure => $postfix::enabled ? {

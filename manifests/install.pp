@@ -19,7 +19,7 @@
 #
 # This class is called from postfix for install.
 #
-class postfix::install {
+class postfix::install inherits ::postfix {
   $packagelist = ['postfix']
 
   package {
