@@ -45,4 +45,24 @@ class postfix::config inherits ::postfix {
         false => []
       };
   }
+
+
+  if $postfix::gmail_smtp_relay_enabled {
+    file { "/etc/postfix/sasl/sasl_passwd":
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0600',
+      content => template('postfix/etc/postfix/sasl/sasl_passwd/sasl_passwd.erb'),
+    }
+    exec { 'create_hash_db':
+      user    => 'root',
+      path    => '/usr/bin:/usr/sbin:/bin/:/sbin',
+      command => 'postmap /etc/postfix/sasl/sasl_passwd && chmod 0600 /etc/postfix/sasl/sasl_passwd.db && service postfix reload',
+      creates => '/etc/icinga2/postgres_module_loaded.txt',
+      subscribe => File['/etc/postfix/sasl/sasl_passwd'],
+      refresh_only => true,
+    }
+  }
+
 }

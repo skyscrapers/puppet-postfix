@@ -45,3 +45,14 @@ mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
 inet_protocols = ipv4
+
+<% if @smtp_relay_auth_enabled -%>
+# Enable SASL authentication
+smtp_sasl_auth_enable = yes
+# Disallow methods that allow anonymous authentication
+smtp_sasl_security_options = noanonymous
+# Location of sasl_passwd
+smtp_sasl_password_maps = hash:/etc/postfix/sasl/sasl_passwd
+# Enable STARTTLS encryption
+smtp_tls_security_level = encrypt
+

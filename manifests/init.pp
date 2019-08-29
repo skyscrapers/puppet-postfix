@@ -38,13 +38,28 @@
 #       relayhosts    => ['[mail01.example.com]','[mail02.example.com]:2525'],
 #       myorigin      => 'server.example.com'
 #     }
+# * Installation of postfix with smtp relay authentication
+#     class {'postfix':
+#       root_email               => 'email@example.com',
+#       relayhosts               => ['[mail01.example.com]','[mail02.example.com]:2525'],
+#       myorigin                 => 'server.example.com'
+#       smtp_relay_auth_enabled  => true
+#       smtp_relay_auth_email    => user@example.com
+#       smtp_relay_auth_password => secret_password
 #
+#     }
+#
+
 class postfix(
   $root_email                   = $postfix::params::root_email,
   $relayhosts                   = undef,
   $extranetwork                 = undef,
   $myorigin                     = $postfix::params::myorigin,
   $enabled                      = $postfix::params::enabled
+  $smtp_relay_auth_enabled      = false,
+  $smtp_relay_auth_email        = undef,
+  $smtp_relay_auth_password     = undef,
+
 ) inherits postfix::params {
 
   contain postfix::install
