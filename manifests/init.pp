@@ -55,10 +55,10 @@ class postfix(
   $relayhosts                   = undef,
   $extranetwork                 = undef,
   $myorigin                     = $postfix::params::myorigin,
-  $enabled                      = $postfix::params::enabled
+  $enabled                      = $postfix::params::enabled,
   $smtp_relay_auth_enabled      = false,
   $smtp_relay_auth_email        = undef,
-  $smtp_relay_auth_password     = undef,
+  $smtp_relay_auth_password     = undef
 
 ) inherits postfix::params {
 
