@@ -47,13 +47,13 @@ class postfix::config inherits ::postfix {
   }
 
 
-  if $postfix::gmail_smtp_relay_enabled {
+  if $postfix::smtp_relay_auth_enabled {
     file { "/etc/postfix/sasl/sasl_passwd":
       ensure => file,
       owner  => 'root',
       group  => 'root',
       mode   => '0600',
-      content => template('postfix/etc/postfix/sasl/sasl_passwd/sasl_passwd.erb'),
+      content => template('postfix/etc/postfix/sasl/sasl_passwd.erb'),
     }
     exec { 'create_hash_db':
       user    => 'root',

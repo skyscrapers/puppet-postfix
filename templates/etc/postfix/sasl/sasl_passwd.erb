@@ -1,7 +1,7 @@
 <% if @smtp_relay_auth_enabled -%>
 <% if @relayhosts -%>
 <% @relayhosts.each do |relayhost| -%>
-<%= relayhost %> <%= smtp_relay_auth_email %>:<%= smtp_relay_auth_password %>
+<%= relayhost %> <%= @smtp_relay_auth_email %>:<%= @smtp_relay_auth_password %>
 <% end -%>
 <% end -%>
 <% end -%>
