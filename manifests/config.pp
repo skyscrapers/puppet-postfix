@@ -61,7 +61,7 @@ class postfix::config inherits ::postfix {
       command => 'postmap /etc/postfix/sasl/sasl_passwd && chmod 0600 /etc/postfix/sasl/sasl_passwd.db && service postfix reload',
       creates => '/etc/icinga2/postgres_module_loaded.txt',
       subscribe => File['/etc/postfix/sasl/sasl_passwd'],
-      refresh_only => true,
+      refreshonly => true,
     }
   }
 
